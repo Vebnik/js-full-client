@@ -1,9 +1,9 @@
 import { ColorModeScript } from "@chakra-ui/react"
 import * as React from "react"
 import * as ReactDOM from "react-dom/client"
-import { App } from "./App"
-import reportWebVitals from "./reportWebVitals"
-import * as serviceWorker from "./serviceWorker"
+import { App } from "./components/App"
+import reportWebVitals from "./utils/reportWebVitals"
+import * as serviceWorker from "./utils/serviceWorker"
 
 
 const container = document.getElementById("root")

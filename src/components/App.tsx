@@ -1,38 +1,40 @@
 import * as React from "react"
-import {
-  ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+import {ChakraProvider, Container, extendTheme, SimpleGrid} from "@chakra-ui/react"
+import Header from "./Header";
+import MenuData from "./menux/MenuData";
+import MenuStreet from "./menux/MenuStreet";
+import MenuRound from "./menux/MenuRound";
+import MenuCitizen from "./menux/MenuCitizen";
+import GlobalSearchStore from "../utils/GlobalSearchStore";
+import {observer} from "mobx-react-lite";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+
+const store = new GlobalSearchStore()
+
+export const Context = React.createContext({store})
+
+const theme = extendTheme({
+  styles: {
+    global: {
+      '::-webkit-scrollbar': {
+        width: '0px',
+      }
+    },
+  },
+})
+
+export const App = observer(() => {
+  return (
+    <Context.Provider value={{store}}>
+      <ChakraProvider theme={theme}>
+        <Header/>
+        <Container display={'flex'} justifyContent={'center'} alignItems={'center'} maxW={'1200px'} py={1} flexDirection={'row'}>
+          <MenuData/>
+          <MenuRound/>
+          <MenuStreet/>
+          <MenuCitizen/>
+        </Container>
+      </ChakraProvider>
+    </Context.Provider>
+  )
+})
