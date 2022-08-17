@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {Citizen} from "../interface/AxiosCitizen";
 
 class GlobalSearchStore {
 
@@ -7,20 +8,21 @@ class GlobalSearchStore {
 	public City = '' as string
 	public Round = '' as string
 	public Street = '' as string
+	public CitizensData = [] as Array<Citizen>
 
 	constructor() {
 		makeAutoObservable(this)
 	}
 
-	public setCity(city: string) {
+	private setCity(city: string) {
 		this.City = city
 	}
 
-	public setRound(round: string) {
+	private setRound(round: string) {
 		this.Round = round
 	}
 
-	public setStreet(street: string) {
+	private setStreet(street: string) {
 		this.Street = street
 	}
 }

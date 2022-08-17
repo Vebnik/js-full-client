@@ -30,8 +30,11 @@ export const App = observer(() => {
         <Header/>
         <Container display={'flex'} justifyContent={'center'} alignItems={'center'} maxW={'1200px'} py={1} flexDirection={'row'}>
           <MenuData/>
+          {'>'}
           <MenuRound/>
+          {'>'}
           <MenuStreet/>
+          {'>'}
           <MenuCitizen/>
         </Container>
       </ChakraProvider>

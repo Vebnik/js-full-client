@@ -4,40 +4,46 @@ import {citizens} from "../../utils/TestData";
 import SearchMenu from "./SearchMenu";
 import {observer} from "mobx-react-lite";
 import {Context} from "../App";
-import DataService from "../../service/DataService";
-
+import AlertToast from "../../utils/ToastDialog";
 
 
 const MenuCitizen = observer(() => {
 
 	const {store} = useContext(Context)
 	const [allCitizen, setCitizen] = useState([''])
-
-	useEffect(() => {
-		DataService.getCitizens().then(results => {
-			setCitizen(results.data.filter(el => el.groups[2].name === store.Street).map(el => el.name))
-		})
-	}, [store.Street])
+	const [filterCitizen, setFilterCitizen] = useState([''])
+	const toast = useToast()
 
 	const filterItem = (inputValue: string) => {
 
 		if (!store.cityChosen)
 			return
 
-		const filterStreet = citizens.filter(el => el.group[2].name === store.Street).map(el => el.name)
-
-		setCitizen(filterStreet.filter(el => el.includes(inputValue)))
+		setFilterCitizen(allCitizen.filter(el => el.includes(inputValue)))
 	}
+
+	const clickHandler = () => {
+		if (!store.Street)
+			AlertToast('Warning', 'Choose Street', 'warning', toast)
+	}
+
+	const getAllData = () =>  {
+		const citizens = store.CitizensData.filter(el => el.groups[2].name === store.Street).map(el => el.name)
+		setCitizen(citizens)
+		setFilterCitizen(citizens)
+	}
+
+	useEffect(() => {getAllData()}, [store.Street])
 
 	return (
 		<Menu>
-			<MenuButton mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.400' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
+			<MenuButton onClick={clickHandler} mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.400' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
 				Citizen
 			</MenuButton>
-			<MenuList w={'130%'} h={'400px'} overflow={'scroll'}>
+			<MenuList w={'130%'} h={'max-content'} overflow={'scroll'}>
 				<SearchMenu filterItem={filterItem}/>
 				{
-					allCitizen.map(el => <MenuItem>{el}</MenuItem>)
+					filterCitizen.map(el => <MenuItem>{el}</MenuItem>)
 				}
 			</MenuList>
 		</Menu>
