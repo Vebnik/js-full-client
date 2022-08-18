@@ -5,7 +5,7 @@ const AlertToast = (title: string, description: string, status: "info" | "warnin
 		status,
 		duration: 1000,
 		isClosable: true,
-		position: 'top'
+		position: 'bottom'
 	})
 };
 

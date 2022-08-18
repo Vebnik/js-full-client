@@ -23,11 +23,6 @@ const MenuCitizen = observer(() => {
 		setFilterCitizen(allCitizen.filter(el => el[0].includes(inputValue)))
 	}
 
-	const clickHandler = () => {
-		if (!store.Street)
-			AlertToast('Warning', 'Choose Street', 'warning', toast)
-	}
-
 	const getAllData = () =>  {
 
 		DataService.getCity().then(results2 => {
@@ -47,10 +42,10 @@ const MenuCitizen = observer(() => {
 
 	return (
 		<Menu>
-			<MenuButton onClick={clickHandler} mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
+			<MenuButton disabled={!store.Street} mx={1} width={'100%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
 				Citizen
 			</MenuButton>
-			<MenuList w={'130%'} h={'max-content'} overflow={'scroll'}>
+			<MenuList w={'80vh'} h={'max-content'} overflow={'scroll'}>
 				<SearchMenu filterItem={filterItem}/>
 				{
 					filterCitizen.map(el =>

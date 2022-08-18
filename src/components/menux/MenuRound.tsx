@@ -28,11 +28,6 @@ const MenuRound = observer(() => {
 		store.Round = ev.target.innerText
 	}
 
-	const clickHandler = () => {
-		if (!store.cityChosen)
-			AlertToast('Warning', 'Choose City', 'warning', toast)
-	}
-
 	const getAllData = () => {
 		// @ts-ignore
 		const round = [...new Set(store.CitizensData.filter(el => el.groups[0].name === store.City).map(el => el.groups[1].name))]
@@ -44,10 +39,10 @@ const MenuRound = observer(() => {
 
 	return (
 		<Menu>
-			<MenuButton onClick={clickHandler} mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
+			<MenuButton disabled={!store.cityChosen} mx={1} width={'100%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
 				District
 			</MenuButton>
-			<MenuList w={'200%'} maxH={'400px'} h={'max-content'} overflow={'scroll'}>
+			<MenuList w={'80vh'} maxH={'400px'} h={'max-content'} overflow={'scroll'}>
 				<SearchMenu filterItem={filterItem}/>
 				{
 					filterRound.map(el => <MenuItem onClick={(ev) => selectItem(ev)}>{el}</MenuItem>)

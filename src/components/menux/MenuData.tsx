@@ -46,10 +46,10 @@ const MenuData = () => {
 
 	return (
 		<Menu>
-			<MenuButton mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
+			<MenuButton mx={1} width={'100%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
 				City
 			</MenuButton>
-			<MenuList w={'200%'} h={'max-content'} overflow={'scroll'}>
+			<MenuList w={'80vh'} h={'max-content'} overflow={'scroll'}>
 				<SearchMenu filterItem={filterItem}/>
 				{
 					filterCity.map(el => <MenuItem onClick={(ev) => selectItem(ev)}>{el}</MenuItem>)
