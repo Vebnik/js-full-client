@@ -44,15 +44,13 @@ const MenuStreet = observer(() => {
 
 	return (
 		<Menu>
-			<MenuButton onClick={clickHandler} mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.400' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
+			<MenuButton onClick={clickHandler} mx={1} width={'30%'} px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'gray.700' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }}>
 				Street
 			</MenuButton>
 			<MenuList w={'200%'} h={'max-content'} overflow={'scroll'}>
 				<SearchMenu filterItem={filterItem}/>
 				{
-					filterStreet[0]
-						? filterStreet.map(el => <MenuItem onClick={(ev) => selectItem(ev)}>{el}</MenuItem>)
-						: ''
+					filterStreet.map(el => <MenuItem onClick={(ev) => selectItem(ev)}>{el}</MenuItem>)
 				}
 			</MenuList>
 		</Menu>
